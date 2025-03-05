@@ -1,0 +1,106 @@
+:root {
+  --grid-height: 100px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: var(--grid-height);
+  background: red;
+  position: relative;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+.subgrid {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-row: 1 / -1;
+  grid-column: 1 / -1;
+}
+
+/* Used to check that additional dom levels can be added to model another component - not mandatory */
+.sidebar-comp {
+  display: contents;
+}
+
+.header {
+  background-color: orange;
+  border: 1px solid black;
+  grid-row: 1 / span 1;
+}
+
+.sidebar {
+  background-color: pink;
+  border: 1px dashed black;
+  grid-row: 1 / span 1;
+}
+
+.A {
+  grid-column: 1 / span 1;
+}
+
+.B {
+  grid-column: 2 / span 1;
+  min-width: 250px;
+}
+
+.C {
+  grid-column: 3 / span 1;
+}
+
+.D {
+  grid-column: 4 / span 1;
+}
+
+.E {
+  grid-column: 5 / span 1;
+  min-width: 250px;
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+    max-width: 20px;
+    justify-content: center;
+    cursor: pointer;
+    background: yellow;
+    align-items: center;
+  }
+  .sidebar-comp {
+    display: block;
+    position: absolute;
+    top: var(--grid-height);
+    right: 0;
+    background: aqua;
+    max-width: 350px;
+    width: 100%;
+    height: calc(100vh - var(--grid-height));
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .sidebar-comp.open {
+    opacity: 1;
+    visibility: visible;
+  }
+  .subgrid {
+    display: block;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, 1fr) 20px;
+  }
+
+  .A,
+  .C,
+  .E {
+    grid-column: auto;
+  }
+}
